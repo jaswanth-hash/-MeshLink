@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sim_title"
+            android:textColor="#6A1B9A"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/sim_disclaimer"
+            android:textColor="#6D4C41"
+            android:textSize="13sp" />
+
+        <com.meshlink.simulation.SimulationGraphView
+            android:id="@+id/simGraph"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginTop="12dp"
+            android:background="#ECEFF1" />
+
+        <TextView
+            android:id="@+id/simDeliveryStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sim_status_idle"
+            android:textColor="#4A148C"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/simRouteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/sim_route_idle"
+            android:textColor="#37474F"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/simHopText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sim_hops_idle"
+            android:textColor="#546E7A"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/sim_live_status"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/simLiveStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="#455A64"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/sim_topology"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/simLoadDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sim_load_default" />
+
+            <Button
+                android:id="@+id/simReset"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sim_reset" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/simFail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sim_fail" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/simNodeInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sim_node_hint"
+                android:inputType="textCapCharacters"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/simAddNode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_add_node" />
+
+            <Button
+                android:id="@+id/simRemoveNode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_remove" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/simLinkA"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="A"
+                android:inputType="textCapCharacters"
+                android:maxLines="1" />
+
+            <EditText
+                android:id="@+id/simLinkB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="B"
+                android:inputType="textCapCharacters"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/simConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_connect" />
+
+            <Button
+                android:id="@+id/simDisconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_disconnect" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/simDisableNode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sim_disable_hint"
+                android:inputType="textCapCharacters"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/simDisable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_disable" />
+
+            <Button
+                android:id="@+id/simEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim_enable" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/sim_send_section"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/simFrom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sim_from"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:text="A" />
+
+            <EditText
+                android:id="@+id/simTo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/sim_to"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:text="D" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/simMessageBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sim_message_hint"
+            android:inputType="text"
+            android:text="hello mesh" />
+
+        <Button
+            android:id="@+id/simSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sim_send" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/sim_event_log"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/simLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:minHeight="120dp"
+            android:textColor="#455A64"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

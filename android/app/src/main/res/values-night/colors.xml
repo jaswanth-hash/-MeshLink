@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mesh_blue">#5AA7FF</color>
+    <color name="mesh_blue_dark">#2D7FE8</color>
+    <color name="mesh_blue_soft">#132B45</color>
+    <color name="mesh_bg">#0F141A</color>
+    <color name="mesh_surface">#171D24</color>
+    <color name="mesh_surface_muted">#202832</color>
+    <color name="mesh_border">#2C3642</color>
+    <color name="mesh_border_strong">#3C4856</color>
+    <color name="mesh_text_primary">#F3F7FB</color>
+    <color name="mesh_text_secondary">#C2CDD9</color>
+    <color name="mesh_text_muted">#8F9BA8</color>
+    <color name="mesh_success">#4BD37B</color>
+    <color name="mesh_warning">#F7B955</color>
+    <color name="mesh_error">#FF6B72</color>
+    <color name="mesh_error_soft">#351B20</color>
+    <color name="mesh_error_border">#6D353B</color>
+    <color name="mesh_disabled">#33404E</color>
+    <color name="mesh_message_incoming">#222A33</color>
+    <color name="mesh_message_outgoing">#12375C</color>
+    <color name="mesh_message_text">#F3F7FB</color>
+</resources>
