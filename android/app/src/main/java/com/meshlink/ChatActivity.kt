@@ -279,6 +279,12 @@ class ChatActivity : AppCompatActivity(), MessageAwareListener {
                     if (message.sentByMe) R.drawable.bg_message_outgoing
                     else R.drawable.bg_message_incoming
                 )
+                body.setTextColor(
+                    androidx.core.content.ContextCompat.getColor(
+                        itemView.context,
+                        if (message.sentByMe) R.color.mesh_message_outgoing_text else R.color.mesh_message_text
+                    )
+                )
                 val time = DateFormat.getTimeFormat(itemView.context).format(Date(message.timestampMs))
                 meta.text = if (message.sentByMe) "You · $time" else "$time"
                 root.gravity = if (message.sentByMe) Gravity.END else Gravity.START

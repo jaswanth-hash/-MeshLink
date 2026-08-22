@@ -19,6 +19,7 @@ import com.google.android.gms.nearby.connection.Payload
 import com.google.android.gms.nearby.connection.PayloadCallback
 import com.google.android.gms.nearby.connection.PayloadTransferUpdate
 import com.google.android.gms.nearby.connection.Strategy
+import com.meshlink.RadioReadinessHelper
 import java.nio.charset.StandardCharsets
 
 /**
@@ -68,11 +69,13 @@ class MeshNetworkManager(
     fun isDiscovering(): Boolean = discovering
 
     fun start(): Boolean {
+        if (discovering) return true
         val availability = GoogleApiAvailability.getInstance()
             .isGooglePlayServicesAvailable(appContext)
         if (availability != ConnectionResult.SUCCESS) {
-            listener.onError("Google Play Services is required for nearby messaging.")
-            listener.onStatusChanged(DiscoveryStatus.ERROR, "Play Services unavailable")
+            val friendly = RadioReadinessHelper.getFriendlyErrorMessage(appContext, "8000")
+            listener.onError(friendly)
+            listener.onStatusChanged(DiscoveryStatus.ERROR, friendly)
             return false
         }
 
@@ -106,7 +109,8 @@ class MeshNetworkManager(
             .addOnFailureListener { error ->
                 updatePeer(endpointId, peer.copy(connectionState = ConnectionState.DISCOVERED))
                 listener.onConnectionStateChanged(endpointId, ConnectionState.DISCOVERED, peer.name)
-                listener.onError("Could not connect: ${error.message ?: "unknown error"}")
+                val friendly = RadioReadinessHelper.getFriendlyErrorMessage(appContext, error.message ?: "unknown error")
+                listener.onError(friendly)
             }
     }
 
@@ -123,7 +127,8 @@ class MeshNetworkManager(
         connectionsClient
             .sendPayload(endpointId, payload)
             .addOnFailureListener { error ->
-                listener.onError("Send failed: ${error.message ?: "unknown error"}")
+                val friendly = RadioReadinessHelper.getFriendlyErrorMessage(appContext, error.message ?: "unknown error")
+                listener.onError(friendly)
             }
         return peers[endpointId]?.connectionState == ConnectionState.CONNECTED
     }
@@ -142,8 +147,9 @@ class MeshNetworkManager(
                 // Advertising is active; discovery status already set in start().
             }
             .addOnFailureListener { error ->
-                listener.onError("Could not become visible: ${error.message ?: "unknown error"}")
-                listener.onStatusChanged(DiscoveryStatus.ERROR, "Advertising failed")
+                val friendly = RadioReadinessHelper.getFriendlyErrorMessage(appContext, error.message ?: "unknown error")
+                listener.onError(friendly)
+                listener.onStatusChanged(DiscoveryStatus.ERROR, friendly)
             }
     }
 
@@ -154,8 +160,9 @@ class MeshNetworkManager(
         connectionsClient
             .startDiscovery(SERVICE_ID, endpointDiscoveryCallback, options)
             .addOnFailureListener { error ->
-                listener.onError("Discovery failed: ${error.message ?: "unknown error"}")
-                listener.onStatusChanged(DiscoveryStatus.ERROR, "Discovery failed")
+                val friendly = RadioReadinessHelper.getFriendlyErrorMessage(appContext, error.message ?: "unknown error")
+                listener.onError(friendly)
+                listener.onStatusChanged(DiscoveryStatus.ERROR, friendly)
             }
     }
 

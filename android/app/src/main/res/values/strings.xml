@@ -131,4 +131,14 @@
     <string name="sim_status_failed">SIM delivery: FAILED</string>
     <string name="sim_hops_idle">SIM hops: —</string>
     <string name="sim_hops_format">SIM hops: %1$d</string>
+
+    <!-- Radio readiness strings -->
+    <string name="radio_bluetooth_disabled">Bluetooth is turned off. Turn it on to discover nearby devices.</string>
+    <string name="radio_location_disabled">Location Services are turned off. Turn them on to discover nearby devices.</string>
+    <string name="radio_location_required_title">Location Services Required</string>
+    <string name="radio_location_required_body">Location Services must be turned on for this device to discover nearby MeshLink phones.</string>
+    <string name="radio_bluetooth_error">Bluetooth error occurred during nearby discovery.</string>
+    <string name="radio_wifi_error">Wi-Fi error occurred during nearby discovery.</string>
+    <string name="radio_play_services_error">Google Play Services is required for nearby messaging.</string>
+    <string name="radio_nearby_error">A nearby communication error occurred. Please try again.</string>
 </resources>

@@ -2,73 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mesh_bg"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingStart="20dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="24dp">
 
+    <!-- Screen Title Header -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.01"
         android:text="@string/messages_title"
-        android:textColor="#0D47A1"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="@color/mesh_text_primary"
+        android:textSize="28sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="center"
+        android:layout_marginTop="4dp"
         android:text="@string/messages_subtitle"
-        android:textColor="#546E7A"
-        android:textSize="13sp" />
+        android:textColor="@color/mesh_text_secondary"
+        android:textSize="14sp" />
 
+    <!-- Empty Messages Hub State Card -->
     <LinearLayout
         android:id="@+id/messagesEmptyState"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
         android:layout_weight="1"
+        android:background="@drawable/bg_empty_state"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="28dp"
         android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:text="@string/messages_empty_title"
-            android:textColor="#37474F"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/mesh_text_primary"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
+            android:lineSpacingExtra="2dp"
             android:text="@string/messages_empty_body"
-            android:textColor="#78909C"
+            android:textColor="@color/mesh_text_secondary"
             android:textSize="14sp" />
     </LinearLayout>
 
+    <!-- Connected Peers List Heading -->
     <TextView
         android:id="@+id/messagesListHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/messages_connected_heading"
-        android:textColor="#263238"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textColor="@color/mesh_text_primary"
+        android:textSize="18sp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messagesPeersRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
 </LinearLayout>

@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="mesh_blue">#1976D2</color>
-    <color name="mesh_blue_dark">#0D47A1</color>
-    <color name="mesh_blue_soft">#EAF3FF</color>
-    <color name="mesh_bg">#F7F9FC</color>
+    <!-- Brand Primary -->
+    <color name="mesh_blue">#4F46E5</color>
+    <color name="mesh_blue_dark">#3730A3</color>
+    <color name="mesh_blue_soft">#EEF2FF</color>
+    <color name="mesh_blue_subtle">#E0E7FF</color>
+
+    <!-- Backgrounds & Surfaces -->
+    <color name="mesh_bg">#F8FAFC</color>
     <color name="mesh_surface">#FFFFFF</color>
     <color name="mesh_surface_muted">#F1F5F9</color>
-    <color name="mesh_border">#E3EAF2</color>
-    <color name="mesh_border_strong">#CBD6E2</color>
-    <color name="mesh_text_primary">#142033</color>
-    <color name="mesh_text_secondary">#526173</color>
-    <color name="mesh_text_muted">#7A8797</color>
-    <color name="mesh_success">#2EAD63</color>
+    <color name="mesh_border">#E2E8F0</color>
+    <color name="mesh_border_strong">#CBD5E1</color>
+
+    <!-- Typography -->
+    <color name="mesh_text_primary">#0F172A</color>
+    <color name="mesh_text_secondary">#475569</color>
+    <color name="mesh_text_muted">#64748B</color>
+
+    <!-- Statuses -->
+    <color name="mesh_success">#10B981</color>
+    <color name="mesh_success_soft">#ECFDF5</color>
     <color name="mesh_warning">#F59E0B</color>
-    <color name="mesh_error">#E5484D</color>
+    <color name="mesh_warning_soft">#FFFBEB</color>
+    <color name="mesh_error">#F43F5E</color>
     <color name="mesh_error_soft">#FFF1F2</color>
-    <color name="mesh_error_border">#F3C2C5</color>
-    <color name="mesh_disabled">#D8E0EA</color>
-    <color name="mesh_message_incoming">#ECEFF4</color>
-    <color name="mesh_message_outgoing">#D9ECFF</color>
-    <color name="mesh_message_text">#142033</color>
+    <color name="mesh_error_border">#FECDD3</color>
+    <color name="mesh_disabled">#E2E8F0</color>
+
+    <!-- Chat Messaging -->
+    <color name="mesh_message_incoming">#F1F5F9</color>
+    <color name="mesh_message_outgoing">#4F46E5</color>
+    <color name="mesh_message_outgoing_text">#FFFFFF</color>
+    <color name="mesh_message_text">#0F172A</color>
 </resources>

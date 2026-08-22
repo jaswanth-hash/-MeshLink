@@ -13,8 +13,9 @@
         android:paddingStart="20dp"
         android:paddingTop="28dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="28dp">
+        android:paddingBottom="36dp">
 
+        <!-- App Header Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
                     android:text="@string/app_name"
                     android:textColor="@color/mesh_text_primary"
                     android:textSize="32sp" />
@@ -41,16 +43,16 @@
                     android:id="@+id/subtitleText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/app_subtitle"
                     android:textColor="@color/mesh_text_secondary"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/settingsButton"
                 android:layout_width="96dp"
-                android:layout_height="42dp"
+                android:layout_height="44dp"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/bg_secondary_button"
                 android:fontFamily="sans-serif-medium"
@@ -61,64 +63,49 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
+        <!-- Status Hero Banner -->
         <LinearLayout
             android:id="@+id/statusCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_card"
-            android:elevation="2dp"
             android:orientation="vertical"
-            android:padding="18dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/connection_heading"
-                android:textColor="@color/mesh_text_primary"
-                android:textSize="16sp" />
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <View
                     android:id="@+id/statusDot"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:background="@drawable/status_dot_idle" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/statusLabelText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/statusLabelText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/status_offline_label"
-                        android:textColor="@color/mesh_text_primary"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/statusText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="@string/status_idle"
-                        android:textColor="@color/mesh_text_secondary"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/status_offline_label"
+                    android:textColor="@color/mesh_text_primary"
+                    android:textSize="18sp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/status_idle"
+                android:textColor="@color/mesh_text_secondary"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/discoveryButton"
@@ -134,6 +121,7 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <!-- Peer Section Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,6 +147,7 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
+        <!-- Empty State Container -->
         <TextView
             android:id="@+id/emptyPeersText"
             android:layout_width="match_parent"
@@ -166,15 +155,16 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_empty_state"
             android:gravity="center"
-            android:lineSpacingExtra="2dp"
-            android:paddingStart="20dp"
-            android:paddingTop="24dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="24dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingStart="24dp"
+            android:paddingTop="28dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="28dp"
             android:text="@string/no_peers"
             android:textColor="@color/mesh_text_secondary"
             android:textSize="14sp" />
 
+        <!-- Peer Recycler View -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/peersRecycler"
             android:layout_width="match_parent"
@@ -184,26 +174,27 @@
             android:nestedScrollingEnabled="false"
             android:overScrollMode="never" />
 
+        <!-- Quick Action Shortcuts Header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="26dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/shortcuts_heading"
             android:textColor="@color/mesh_text_primary"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/messagesButton"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_secondary_button"
                 android:fontFamily="sans-serif-medium"
@@ -211,22 +202,40 @@
                 android:text="@string/messages_button"
                 android:textAllCaps="false"
                 android:textColor="@color/mesh_blue"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <Space
-                android:layout_width="12dp"
+                android:layout_width="6dp"
                 android:layout_height="1dp" />
 
             <Button
                 android:id="@+id/simulatorButton"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_secondary_button"
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="2"
                 android:minHeight="0dp"
                 android:text="@string/open_simulator"
+                android:textAllCaps="false"
+                android:textColor="@color/mesh_blue"
+                android:textSize="13sp" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/adminButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_secondary_button"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="2"
+                android:minHeight="0dp"
+                android:text="👑 Admin"
                 android:textAllCaps="false"
                 android:textColor="@color/mesh_blue"
                 android:textSize="13sp" />

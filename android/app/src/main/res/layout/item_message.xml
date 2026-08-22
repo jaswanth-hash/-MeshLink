@@ -4,18 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp">
+    android:paddingStart="4dp"
+    android:paddingTop="5dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="5dp">
 
     <TextView
         android:id="@+id/messageBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_message_incoming"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="8dp"
+        android:lineSpacingExtra="2dp"
+        android:maxWidth="280dp"
+        android:paddingStart="14dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
         android:textColor="@color/mesh_message_text"
         android:textSize="15sp" />
 
@@ -23,7 +27,9 @@
         android:id="@+id/messageMeta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="3dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
         android:textColor="@color/mesh_text_muted"
         android:textSize="11sp" />
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.meshlink
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,9 +42,31 @@ class MainActivity : AppCompatActivity(), MessageAwareListener {
     ) { results ->
         val granted = results.values.all { it }
         if (granted) {
-            startDiscovery()
+            if (checkRadioReadinessOrPrompt()) {
+                startDiscovery()
+            }
         } else {
             showPermissionDenied()
+        }
+    }
+
+    private val enableBluetoothLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { _ ->
+        if (RadioReadinessHelper.checkRadioReadiness(this) == RadioStatus.READY) {
+            startDiscovery()
+        } else {
+            checkRadioReadinessOrPrompt()
+        }
+    }
+
+    private val enableLocationLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { _ ->
+        if (RadioReadinessHelper.checkRadioReadiness(this) == RadioStatus.READY) {
+            startDiscovery()
+        } else {
+            checkRadioReadinessOrPrompt()
         }
     }
 
@@ -64,6 +88,9 @@ class MainActivity : AppCompatActivity(), MessageAwareListener {
             onConnect = { peer ->
                 if (!PermissionHelper.hasAllPermissions(this)) {
                     requestPermissionsOrExplain()
+                    return@PeerAdapter
+                }
+                if (!checkRadioReadinessOrPrompt()) {
                     return@PeerAdapter
                 }
                 when (peer.connectionState) {
@@ -101,6 +128,10 @@ class MainActivity : AppCompatActivity(), MessageAwareListener {
 
         findViewById<Button>(R.id.settingsButton).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.adminButton).setOnClickListener {
+            AdminActivity.start(this)
         }
 
         refreshPeers(network.getPeers())
@@ -162,9 +193,44 @@ class MainActivity : AppCompatActivity(), MessageAwareListener {
             .show()
     }
 
+    private fun checkRadioReadinessOrPrompt(): Boolean {
+        return when (RadioReadinessHelper.checkRadioReadiness(this)) {
+            RadioStatus.READY -> true
+            RadioStatus.BLUETOOTH_DISABLED -> {
+                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                runCatching {
+                    enableBluetoothLauncher.launch(intent)
+                }.onFailure {
+                    val msg = getString(R.string.radio_bluetooth_disabled)
+                    updateStatusUi(DiscoveryStatus.ERROR, msg)
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                }
+                false
+            }
+            RadioStatus.LOCATION_DISABLED -> {
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.radio_location_required_title)
+                    .setMessage(R.string.radio_location_required_body)
+                    .setPositiveButton(R.string.open_settings) { _, _ ->
+                        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                        runCatching { enableLocationLauncher.launch(intent) }
+                    }
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->
+                        updateStatusUi(DiscoveryStatus.ERROR, getString(R.string.radio_location_disabled))
+                    }
+                    .show()
+                false
+            }
+        }
+    }
+
     private fun startDiscovery() {
+        if (network.isDiscovering()) return
         if (!PermissionHelper.hasAllPermissions(this)) {
             requestPermissionsOrExplain()
+            return
+        }
+        if (!checkRadioReadinessOrPrompt()) {
             return
         }
         app.preferences.getDisplayName()?.takeIf { it.isNotBlank() }?.let {
@@ -285,7 +351,8 @@ class MainActivity : AppCompatActivity(), MessageAwareListener {
 
     override fun onError(message: String) {
         runOnUiThread {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            val friendly = RadioReadinessHelper.getFriendlyErrorMessage(this, message)
+            Toast.makeText(this, friendly, Toast.LENGTH_SHORT).show()
         }
     }
 

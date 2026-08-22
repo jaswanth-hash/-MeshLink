@@ -65,6 +65,11 @@
             android:label="@string/sim_title"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".AdminActivity"
+            android:exported="false"
+            android:label="Admin Controller"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
