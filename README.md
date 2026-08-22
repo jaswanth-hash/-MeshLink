@@ -40,7 +40,9 @@ Status
 
 🚧 Prototype / Demo
 
-The current version demonstrates the Android UI, peer discovery architecture, messaging, mesh routing, and network simulation.
+The current version demonstrates the Android UI, peer discovery architecture,
+messaging, mesh routing, and network simulation.
+```
 
 Future Plans
 
@@ -54,4 +56,4 @@ Future Plans
 
 Author
 
-Jaswanth
+Jaswanth ch
