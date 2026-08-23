@@ -71,7 +71,7 @@ class AdminManager(
         }
 
         // 6. Blocklist check
-        if (blocklistFilter.isBlocked(command.targetNodeId)) {
+        if (command.type != AdminCommandType.UNBLOCK_NODE && blocklistFilter.isBlocked(command.targetNodeId)) {
             return ValidationResult.BlockedNode("Target node ${command.targetNodeId} is blocked")
         }
         if (sourceNodeId != null && blocklistFilter.isBlocked(sourceNodeId)) {

@@ -119,7 +119,7 @@ class AdminCommandHandlerTest {
     fun executeRequestTopologyAndNetworkStatus_returnsExpectedTelemetry() {
         val dummyTransport = object : MeshTransport {
             override fun sendToEndpoint(endpointId: String, payload: String): Boolean = true
-            override fun connectedEndpointIds(): List<String> = listOf("ep-101", "ep-102")
+            override fun connectedEndpointIds(): Set<String> = setOf("ep-101", "ep-102")
         }
 
         val router = MeshRouter(
@@ -154,7 +154,7 @@ class AdminCommandHandlerTest {
     fun broadcastResult_reportsDeliveryStateAccurately() {
         val dummyTransport = object : MeshTransport {
             override fun sendToEndpoint(endpointId: String, payload: String): Boolean = true
-            override fun connectedEndpointIds(): List<String> = listOf("ep-1")
+            override fun connectedEndpointIds(): Set<String> = setOf("ep-1")
         }
         val router = MeshRouter(localNodeId = "LocalNode", transport = dummyTransport)
         router.onNeighborConnected("ep-1", "Peer-1")

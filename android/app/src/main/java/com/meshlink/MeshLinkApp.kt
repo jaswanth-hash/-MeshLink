@@ -154,6 +154,36 @@ class MeshSession {
 
     private fun deliverToUi(app: MeshLinkApp, packet: MeshPacket) {
         val endpointId = router?.endpointForNode(packet.sourceId) ?: packet.sourceId
+
+        if (com.meshlink.admin.AdminPacketCodec.isAdminFrame(packet.payload)) {
+            val adminManager = com.meshlink.admin.AdminManager(com.meshlink.admin.AdminTrustStore(app))
+            val validation = adminManager.validateIncomingPayload(packet.payload, sourceNodeId = packet.sourceId)
+            if (validation is com.meshlink.admin.ValidationResult.Valid) {
+                val command = validation.command
+                val handler = com.meshlink.admin.AdminCommandHandler(com.meshlink.admin.AdminTrustStore(app))
+                handler.executeCommand(command, router)
+
+                if (command.type == com.meshlink.admin.AdminCommandType.BROADCAST) {
+                    val saved = app.messageStore.insert(
+                        ChatMessage(
+                            peerId = endpointId,
+                            peerName = "👑 ADMIN (${packet.sourceId})",
+                            body = command.commandData,
+                            sentByMe = false
+                        )
+                    )
+                    snapshotListeners().forEach { listener ->
+                        if (listener is MessageAwareListener) {
+                            listener.onMessageStored(saved)
+                        } else {
+                            listener.onMessageReceived(endpointId, command.commandData)
+                        }
+                    }
+                }
+            }
+            return
+        }
+
         val saved = app.messageStore.insert(
             ChatMessage(
                 peerId = endpointId,

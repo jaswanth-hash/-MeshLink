@@ -1,5 +1,6 @@
 package com.meshlink.admin
 
+import com.meshlink.crypto.AdminKeyManager
 import com.meshlink.routing.MeshRouter
 import com.meshlink.routing.SendResult
 
@@ -174,7 +175,7 @@ class AdminCommandHandler(
                 destinationNodeId = entry.destinationNodeId,
                 nextHopEndpointId = entry.nextHopEndpointId,
                 hopCount = entry.hopCount,
-                lastSeenMs = entry.lastSeenMs
+                lastSeenMs = entry.lastUpdatedMs
             )
         }
 

@@ -220,7 +220,7 @@ class AdminManagerTest {
         trustStore.blockNode(blockedTarget)
 
         val command = AdminPacketCodec.createSignedCommand(
-            type = AdminCommandType.UNBLOCK_NODE,
+            type = AdminCommandType.BLOCK_NODE,
             commandId = "cmd-block-1",
             adminFingerprint = adminFingerprint,
             targetNodeId = blockedTarget,
@@ -231,6 +231,25 @@ class AdminManagerTest {
         )
         val result = adminManager.validateIncomingPayload(AdminPacketCodec.encode(command))
         assertTrue(result is ValidationResult.BlockedNode)
+    }
+
+    @Test
+    fun unblockNode_targetingBlockedNode_accepted() {
+        val blockedTarget = "blocked-node-99"
+        trustStore.blockNode(blockedTarget)
+
+        val command = AdminPacketCodec.createSignedCommand(
+            type = AdminCommandType.UNBLOCK_NODE,
+            commandId = "cmd-unblock-1",
+            adminFingerprint = adminFingerprint,
+            targetNodeId = blockedTarget,
+            sequenceNumber = 1L,
+            timestampMs = currentTimeMs,
+            commandData = "Unblocking node",
+            keyManager = adminKeyManager
+        )
+        val result = adminManager.validateIncomingPayload(AdminPacketCodec.encode(command))
+        assertTrue("Expected Valid result for UNBLOCK_NODE, got $result", result is ValidationResult.Valid)
     }
 
     @Test

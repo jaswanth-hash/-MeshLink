@@ -30,6 +30,7 @@ class AdminTrustStore(
     /**
      * Sets or updates the trusted Admin public key and fingerprint (for Genesis or Admin Transfer).
      */
+    @Synchronized
     fun setTrustedAdmin(publicKeyBase64: String): Boolean {
         val fingerprint = AdminKeyManager.computeFingerprint(publicKeyBase64) ?: return false
         prefs.edit()
@@ -58,6 +59,7 @@ class AdminTrustStore(
     /**
      * Clears trusted Admin state (for Admin revocation/reset).
      */
+    @Synchronized
     fun clearTrustedAdmin() {
         prefs.edit()
             .remove(KEY_ADMIN_PUBKEY)
@@ -76,6 +78,7 @@ class AdminTrustStore(
      * Updates the highest sequence number if [sequenceNumber] > current sequence number.
      * Returns true if sequence number was updated, false if rejected (replay attack).
      */
+    @Synchronized
     fun updateSequenceNumber(sequenceNumber: Long): Boolean {
         val current = getLastSequenceNumber()
         if (sequenceNumber <= current) {
@@ -100,6 +103,7 @@ class AdminTrustStore(
     /**
      * Blocks/revokes a node ID.
      */
+    @Synchronized
     fun blockNode(nodeId: String) {
         if (nodeId.isBlank()) return
         val current = getBlockedNodeIds().toMutableSet()
@@ -110,6 +114,7 @@ class AdminTrustStore(
     /**
      * Unblocks/restores a node ID.
      */
+    @Synchronized
     fun unblockNode(nodeId: String) {
         val current = getBlockedNodeIds().toMutableSet()
         if (current.remove(nodeId)) {
@@ -120,6 +125,7 @@ class AdminTrustStore(
     /**
      * Clears all blocked nodes.
      */
+    @Synchronized
     fun clearBlocklist() {
         prefs.edit().remove(KEY_BLOCKED_NODES).apply()
     }
@@ -127,6 +133,7 @@ class AdminTrustStore(
     /**
      * Clears all Admin trust store data.
      */
+    @Synchronized
     fun clearAll() {
         prefs.edit().clear().apply()
     }
